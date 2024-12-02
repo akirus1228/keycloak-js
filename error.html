@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <script src="https://cdn.jsdelivr.net/npm/keycloak-js@25.0.6/dist/keycloak.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const keycloak = new Keycloak({
+                url: 'http://localhost:8080',
+                realm: 'vinas',
+                clientId: 'oid-vinas'
+            });
+
+            // Show alert and redirect
+            alert('Authentication Error: Failed to initialize authentication. Please try again.');
+            
+            // Initialize Keycloak and logout
+            keycloak.init().then(function() {
+                keycloak.logout();
+            }).catch(function(error) {
+                console.error('Keycloak init failed:', error);
+                keycloak.login();
+            });
+        });
+    </script>
+</head>
+<body>
+    <!-- Empty body as we're immediately redirecting -->
+</body>
+</html>

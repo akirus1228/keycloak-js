@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.display = 'none';
 
     const keycloak = new Keycloak({
-        url: 'http://localhost:8180',
+        url: 'http://localhost:8080',
         realm: 'vinas',
         clientId: 'oid-vinas'
     }); 

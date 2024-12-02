@@ -42,16 +42,14 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add global logout function with redirect
     window.logout = function() {
         // Redirect to login page after logout
-        keycloak.logout({
-            redirectUri: window.location.origin + '/login.html'
-        }).then(() => {
+        keycloak.logout().then(() => {
             // Clear any local storage or session storage if needed
             sessionStorage.clear();
             localStorage.clear();
         }).catch((error) => {
             console.error('Logout failed:', error);
             // Fallback redirect
-            window.location.href = '/login.html';
+            keycloak.login();
         });
     };
 });
