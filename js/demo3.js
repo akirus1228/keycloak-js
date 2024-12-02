@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.body.style.display = 'none';
 
     const keycloak = new Keycloak({
-        url: 'http://localhost:8180',
+        url: 'http://localhost:8080',
         realm: 'vinas',
         clientId: 'oid-vinas'
     });
@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 if (!roles.includes('rol_group3')) {
                     console.log('User does not have access to Demo3');
-                    window.location.replace('/unauthorized.html');
+                    alert('Access Denied: You do not have permission to access this page.');
+                    keycloak.logout();
                     return;
                 }
 
@@ -31,7 +32,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         } catch (error) {
             console.error('Failed to initialize Keycloak:', error);
-            window.location.replace('/error.html');
+            alert('Authentication Error: ' + (error.message || 'Failed to initialize authentication.'));
+            keycloak.logout();
         }
     }
 
